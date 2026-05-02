@@ -1,0 +1,136 @@
+<!-- Bibliotecas externas (Tailwind y Icons) -->
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<!-- NAVIGATION -->
+<nav class="fixed w-full z-50 glass p-4">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+        <span class="font-black text-2xl tracking-tighter text-blue-500">SS.</span>
+        <div class="flex items-center gap-6">
+            <div class="flex bg-slate-800 rounded-lg p-1 text-xs font-bold">
+                <button onclick="setLanguage('en')" id="btn-en" class="px-3 py-1 rounded bg-blue-600 transition">EN</button>
+                <button onclick="setLanguage('es')" id="btn-es" class="px-3 py-1 rounded transition text-slate-400">ES</button>
+            </div>
+            <div class="hidden md:block text-xs text-slate-500">
+                <i class="fas fa-eye mr-1"></i> <span id="view-count">0</span>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO SECTION -->
+<header class="pt-40 pb-10 px-6 text-center">
+    <h1 class="text-6xl md:text-8xl font-black mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-400 to-emerald-400">Sebastian Sosa</h1>
+    <p class="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto mb-10 font-medium">
+        Technical Strategy Leader & Consultative Presales
+    </p>
+</header>
+
+<!-- EXTRACTO PROFESIONAL -->
+<section class="max-w-4xl mx-auto px-6 py-10 text-center">
+    <div class="glass p-8 rounded-3xl border-blue-500/20">
+        <h2 class="text-blue-500 font-black uppercase tracking-widest text-xs mb-4" data-en="Professional Summary" data-es="Extracto Profesional">Extracto Profesional</h2>
+        <p class="text-lg md:text-xl leading-relaxed text-slate-300" 
+           data-en="Specialist in architecture and design of Unified Communications (UC) and Contact Center (CC) solutions. With a trajectory focused on the role of Presales and Solutions Architect, I have led complex implementations in 5 different countries. Currently, I am expanding my technical horizon towards development (Frontend, Python, Node.js), the Salesforce ecosystem, and GenAI." 
+           data-es="Especialista en arquitectura y diseño de soluciones Unified Communications (UC) y Contact Center (CC). Con una trayectoria enfocada en el rol de Preventa y Arquitecto de Soluciones, he liderado implementaciones complejas en 5 países distintos. Actualmente, expando mi horizonte técnico hacia el desarrollo (Frontend, Python, Node.js), el ecosistema Salesforce y GenAI.">
+            Especialista en arquitectura y diseño de soluciones Unified Communications (UC) y Contact Center (CC). Con una trayectoria enfocada en el rol de Preventa y Arquitecto de Soluciones, he liderado implementaciones complejas en 5 países distintos. Actualmente, expando mi horizonte técnico hacia el desarrollo (Frontend, Python, Node.js), el ecosistema Salesforce y GenAI.
+        </p>
+    </div>
+</section>
+
+<!-- TECHNICAL EXPERTISE -->
+<section class="max-w-7xl mx-auto px-6 py-12">
+    <h2 class="text-sm font-black uppercase tracking-widest text-blue-500 mb-10 text-center" data-en="Technical Expertise" data-es="Expertise Técnico">Technical Expertise</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <div class="glass p-8 rounded-3xl flex flex-col items-center text-center hover:border-blue-500/50 transition">
+            <div class="w-16 h-16 mb-6 flex items-center justify-center bg-blue-500/10 rounded-2xl">
+                <i class="fas fa-network-wired text-3xl text-blue-400"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-4">Cloud & UC</h3>
+            <p class="text-slate-400 text-sm" data-en="Architecture and design of complex UC/CC solutions (Avaya, Genesys, Five9) with a focus on global migrations." data-es="Arquitectura y diseño de soluciones complejas de UC/CC (Avaya, Genesys, Five9) con foco en migraciones globales.">Arquitectura y diseño de soluciones complejas de UC/CC (Avaya, Genesys, Five9) con foco en migraciones globales.</p>
+        </div>
+
+        <div class="glass p-8 rounded-3xl flex flex-col items-center text-center hover:border-sky-500/50 transition">
+            <div class="w-16 h-16 mb-6 flex items-center justify-center bg-sky-500/10 rounded-2xl">
+                <i class="fab fa-salesforce text-4xl text-sky-400"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-4">Salesforce</h3>
+            <p class="text-slate-400 text-sm" data-en="Ecosystem mastery: Flow Builder, SOQL/SOSL, Apex development, and Trailhead Superbadges." data-es="Dominio del ecosistema: Flow Builder, SOQL/SOSL, desarrollo Apex y Superbadges de Trailhead.">Dominio del ecosistema: Flow Builder, SOQL/SOSL, desarrollo Apex y Superbadges de Trailhead.</p>
+        </div>
+
+        <div class="glass p-8 rounded-3xl flex flex-col items-center text-center hover:border-red-500/50 transition">
+            <div class="w-16 h-16 mb-6 flex items-center justify-center bg-red-500/10 rounded-2xl">
+                <i class="fas fa-shield-halved text-3xl text-red-400"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-4" data-en="Cybersecurity" data-es="Ciberseguridad">Ciberseguridad</h3>
+            <p class="text-slate-400 text-sm" data-en="Security frameworks, network protection, and tools like Fortinet and Checkpoint." data-es="Frameworks de seguridad, protección de redes y herramientas como Fortinet y Checkpoint.">Frameworks de seguridad, protección de redes y herramientas como Fortinet y Checkpoint.</p>
+        </div>
+
+        <div class="glass p-8 rounded-3xl flex flex-col items-center text-center hover:border-emerald-500/50 transition">
+            <div class="w-16 h-16 mb-6 flex items-center justify-center bg-emerald-500/10 rounded-2xl">
+                <i class="fas fa-code text-3xl text-emerald-400"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-4" data-en="Programming" data-es="Programación">Programación</h3>
+            <p class="text-slate-400 text-sm">
+                <span class="text-white font-mono">Python, Node.js, Apex, Frontend.</span><br>
+                <span class="mt-2 block" data-en="Automation-focused development." data-es="Desarrollo enfocado en automatización.">Desarrollo enfocado en automatización.</span>
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- PROFESSIONAL JOURNEY -->
+<section class="max-w-4xl mx-auto px-6 py-20">
+    <h2 class="text-3xl font-bold mb-12" data-en="Professional Journey" data-es="Trayectoria Profesional">Trayectoria Profesional</h2>
+    <div class="space-y-6">
+        <!-- Avaya -->
+        <div class="glass rounded-3xl overflow-hidden group">
+            <button onclick="toggleExp(this)" class="w-full p-8 text-left flex justify-between items-center hover:bg-slate-800/40 transition">
+                <div>
+                    <h3 class="text-2xl font-bold group-hover:text-blue-400 transition">APS Consultant | Avaya</h3>
+                    <p class="text-slate-500" data-en="2023 - Present" data-es="Agosto 2023 - Actualidad">Agosto 2023 - Actualidad</p>
+                </div>
+                <i class="fas fa-chevron-down transition-transform duration-300"></i>
+            </button>
+            <div class="collapsible-content">
+                <div class="p-8 pt-0 border-t border-slate-800 mt-4 text-slate-400 space-y-4">
+                    <p data-en="Leading Strategy for CX & AI. Focused on Avaya Infinity and Cloud Office solutions." data-es="Liderazgo de Estrategia CX e IA. Foco en soluciones Avaya Infinity y Cloud Office.">Liderazgo de Estrategia CX e IA. Foco en soluciones Avaya Infinity y Cloud Office.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Inside One -->
+        <div class="glass rounded-3xl overflow-hidden group">
+            <button onclick="toggleExp(this)" class="w-full p-8 text-left flex justify-between items-center hover:bg-slate-800/40 transition">
+                <div>
+                    <h3 class="text-2xl font-bold group-hover:text-blue-400 transition">Engineering Manager | Inside One</h3>
+                    <p class="text-slate-500">2014 - 2021</p>
+                </div>
+                <i class="fas fa-chevron-down transition-transform duration-300"></i>
+            </button>
+            <div class="collapsible-content">
+                <div class="p-8 pt-0 border-t border-slate-800 mt-4 text-slate-400 space-y-4">
+                    <p data-en="Designed global cloud architectures and managed presales teams." data-es="Diseño de arquitecturas cloud globales y gestión de equipos de preventa.">Diseño de arquitecturas cloud globales y gestión de equipos de preventa.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="py-20 bg-black text-center px-6 border-t border-slate-900">
+    <div class="flex flex-wrap justify-center gap-8 text-slate-400 mb-8">
+        <a href="mailto:ssosa17@gmail.com" class="hover:text-blue-400 transition"><i class="fas fa-envelope"></i></a>
+        <a href="https://www.linkedin.com/in/ssosa17/" target="_blank" class="hover:text-blue-400 transition"><i class="fab fa-linkedin"></i></a>
+    </div>
+    <p class="text-xs text-slate-600 uppercase tracking-widest">© 2026 Sebastian Sosa</p>
+</footer>
+
+<!-- LIKE BUTTON -->
+<div class="fixed bottom-10 right-10 z-50">
+    <button onclick="addLike()" class="bg-rose-600 w-14 h-14 rounded-2xl shadow-2xl flex items-center justify-center transition active:scale-90 relative">
+        <i class="fas fa-heart text-white"></i>
+        <span id="like-count" class="absolute -top-2 -right-2 bg-white text-rose-600 text-[10px] font-bold px-2 py-0.5 rounded-full">0</span>
+    </button>
+</div>
