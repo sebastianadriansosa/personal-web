@@ -1,114 +1,716 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sebastian Sosa | Technical Strategy Leader</title>
-    
-    <!-- Bibliotecas externas -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
-    <!-- ESTO ES LO QUE TE FALTABA: Conexión al archivo CSS -->
+    <title>Sebastian Sosa | Solution Architect & Presales</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-slate-950 text-slate-200 font-sans">
+<body>
 
-    <!-- NAVIGATION -->
-    <nav class="fixed w-full z-50 glass p-4">
-        <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <span class="font-black text-2xl tracking-tighter text-blue-500">SS.</span>
-            <div class="flex items-center gap-6">
-                <div class="flex bg-slate-800 rounded-lg p-1 text-xs font-bold">
-                    <button onclick="setLanguage('en')" id="btn-en" class="px-3 py-1 rounded bg-blue-600 transition">EN</button>
-                    <button onclick="setLanguage('es')" id="btn-es" class="px-3 py-1 rounded transition text-slate-400">ES</button>
+    <!-- CUSTOM CURSOR -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursor-follower"></div>
+
+    <!-- SCANLINE OVERLAY -->
+    <div class="scanlines"></div>
+
+    <!-- NAV -->
+    <nav id="navbar">
+        <div class="nav-inner">
+            <div class="nav-logo">
+                <span class="logo-bracket">[</span>SS<span class="logo-bracket">]</span>
+            </div>
+            <div class="nav-links">
+                <a href="#expertise" data-en="Expertise" data-es="Expertise">Expertise</a>
+                <a href="#experience" data-en="Experience" data-es="Experiencia">Experience</a>
+                <a href="#certifications" data-en="Certs" data-es="Certs">Certs</a>
+                <a href="#projects" data-en="Projects" data-es="Proyectos">Projects</a>
+                <a href="#contact" data-en="Contact" data-es="Contacto">Contact</a>
+            </div>
+            <div class="nav-actions">
+                <div class="lang-toggle">
+                    <button id="btn-en" class="lang-btn active" onclick="setLanguage('en')">EN</button>
+                    <span class="lang-sep">/</span>
+                    <button id="btn-es" class="lang-btn" onclick="setLanguage('es')">ES</button>
                 </div>
-                <div class="hidden md:block text-xs text-slate-500">
-                    <i class="fas fa-eye mr-1"></i> <span id="view-count">0</span>
+                <div class="nav-stats">
+                    <span class="stat-item"><i class="fas fa-eye"></i> <span id="view-count">0</span></span>
+                    <span class="stat-item"><i class="fas fa-heart"></i> <span id="like-count-nav">0</span></span>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
-    <header class="pt-40 pb-10 px-6 text-center">
-        <h1 class="text-6xl md:text-8xl font-black mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-400 to-emerald-400">Sebastian Sosa</h1>
-        <p class="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto mb-10 font-medium">
-            Technical Strategy Leader & Consultative Presales
-        </p>
-    </header>
-
-    <!-- EXTRACTO PROFESIONAL -->
-    <section class="max-w-4xl mx-auto px-6 py-10 text-center">
-        <div class="glass p-8 rounded-3xl border-blue-500/20">
-            <h2 class="text-blue-500 font-black uppercase tracking-widest text-xs mb-4" data-en="Professional Summary" data-es="Extracto Profesional">Extracto Profesional</h2>
-            <p class="text-lg md:text-xl leading-relaxed text-slate-300" 
-               data-en="Specialist in architecture and design of Unified Communications (UC) and Contact Center (CC) solutions. With a trajectory focused on the role of Presales and Solutions Architect, I have led complex implementations in 5 different countries. Currently, I am expanding my technical horizon towards development (Frontend, Python, Node.js), the Salesforce ecosystem, and GenAI." 
-               data-es="Especialista en arquitectura y diseño de soluciones Unified Communications (UC) y Contact Center (CC). Con una trayectoria enfocada en el rol de Preventa y Arquitecto de Soluciones, he liderado implementaciones complejas en 5 países distintos. Actualmente, expando mi horizonte técnico hacia el desarrollo (Frontend, Python, Node.js), el ecosistema Salesforce y GenAI.">
-                Especialista en arquitectura y diseño de soluciones Unified Communications (UC) y Contact Center (CC). Con una trayectoria enfocada en el rol de Preventa y Arquitecto de Soluciones, he liderado implementaciones complejas en 5 países distintos. Actualmente, expando mi horizonte técnico hacia el desarrollo (Frontend, Python, Node.js), el ecosistema Salesforce y GenAI.
+    <!-- HERO -->
+    <section id="hero">
+        <div class="hero-bg-grid"></div>
+        <div class="hero-orbs">
+            <div class="orb orb-1"></div>
+            <div class="orb orb-2"></div>
+            <div class="orb orb-3"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="badge-dot"></span>
+                <span data-en="Available for opportunities" data-es="Disponible para oportunidades">Available for opportunities</span>
+            </div>
+            <h1 class="hero-name">
+                <span class="name-line">Sebastian</span>
+                <span class="name-line accent">Sosa</span>
+            </h1>
+            <div class="hero-title-wrapper">
+                <span class="title-prefix">//</span>
+                <div class="hero-typewriter" id="typewriter"></div>
+                <span class="cursor-blink">_</span>
+            </div>
+            <p class="hero-summary" data-en="Senior Presales & Solution Architect with 14+ years designing Unified Communications and Contact Center solutions across 5 countries. Expanding into Salesforce ecosystem, GenAI, Dialogflow CX, and full-stack development." data-es="Arquitecto de Soluciones y Preventa Senior con más de 14 años diseñando soluciones de Comunicaciones Unificadas y Contact Center en 5 países. Expandiéndome hacia el ecosistema Salesforce, GenAI, Dialogflow CX y desarrollo full-stack.">
+                Senior Presales & Solution Architect with 14+ years designing Unified Communications and Contact Center solutions across 5 countries. Expanding into Salesforce ecosystem, GenAI, Dialogflow CX, and full-stack development.
             </p>
+            <div class="hero-cta">
+                <button onclick="downloadCV()" class="btn-primary">
+                    <i class="fas fa-download"></i>
+                    <span data-en="Download Technical CV" data-es="Descargar CV Técnico">Download Technical CV</span>
+                </button>
+                <a href="#contact" class="btn-secondary">
+                    <span data-en="Let's Talk" data-es="Hablemos">Let's Talk</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="hero-metrics">
+                <div class="metric">
+                    <span class="metric-num">14<span class="metric-plus">+</span></span>
+                    <span class="metric-label" data-en="Years in IT" data-es="Años en IT">Years in IT</span>
+                </div>
+                <div class="metric-divider"></div>
+                <div class="metric">
+                    <span class="metric-num">5</span>
+                    <span class="metric-label" data-en="Countries" data-es="Países">Countries</span>
+                </div>
+                <div class="metric-divider"></div>
+                <div class="metric">
+                    <span class="metric-num">103</span>
+                    <span class="metric-label" data-en="SF Badges" data-es="Badges SF">SF Badges</span>
+                </div>
+                <div class="metric-divider"></div>
+                <div class="metric">
+                    <span class="metric-num">3</span>
+                    <span class="metric-label" data-en="Superbadges" data-es="Superbadges">Superbadges</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll-indicator">
+            <span>scroll</span>
+            <div class="scroll-line"></div>
         </div>
     </section>
 
-    <!-- TECHNICAL EXPERTISE -->
-    <section class="max-w-7xl mx-auto px-6 py-12">
-        <h2 class="text-sm font-black uppercase tracking-widest text-blue-500 mb-10 text-center" data-en="Technical Expertise" data-es="Expertise Técnico">Technical Expertise</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div class="glass p-8 rounded-3xl flex flex-col items-center text-center hover:border-blue-500/50 transition">
-                <div class="w-16 h-16 mb-6 flex items-center justify-center bg-blue-500/10 rounded-2xl">
-                    <i class="fas fa-network-wired text-3xl text-blue-400"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-4">Cloud & UC</h3>
-                <p class="text-slate-400 text-sm" data-en="Architecture and design of complex UC/CC solutions (Avaya, Genesys, Five9) with a focus on global migrations." data-es="Arquitectura y diseño de soluciones complejas de UC/CC (Avaya, Genesys, Five9) con foco en migraciones globales.">Arquitectura y diseño de soluciones complejas de UC/CC (Avaya, Genesys, Five9) con foco en migraciones globales.</p>
+    <!-- TECH STACK MARQUEE -->
+    <div class="marquee-section">
+        <div class="marquee-track">
+            <div class="marquee-inner" id="marquee">
+                <span>Avaya Aura</span><span class="sep">◆</span>
+                <span>Genesys Cloud</span><span class="sep">◆</span>
+                <span>Five9</span><span class="sep">◆</span>
+                <span>Salesforce</span><span class="sep">◆</span>
+                <span>Dialogflow CX</span><span class="sep">◆</span>
+                <span>Microsoft Teams</span><span class="sep">◆</span>
+                <span>AWS Cloud</span><span class="sep">◆</span>
+                <span>Python</span><span class="sep">◆</span>
+                <span>Node.js</span><span class="sep">◆</span>
+                <span>Apex</span><span class="sep">◆</span>
+                <span>Fortinet</span><span class="sep">◆</span>
+                <span>Cisco Meraki</span><span class="sep">◆</span>
+                <span>Flow Builder</span><span class="sep">◆</span>
+                <span>GenAI</span><span class="sep">◆</span>
+                <span>Avaya Aura</span><span class="sep">◆</span>
+                <span>Genesys Cloud</span><span class="sep">◆</span>
+                <span>Five9</span><span class="sep">◆</span>
+                <span>Salesforce</span><span class="sep">◆</span>
+                <span>Dialogflow CX</span><span class="sep">◆</span>
+                <span>Microsoft Teams</span><span class="sep">◆</span>
+                <span>AWS Cloud</span><span class="sep">◆</span>
+                <span>Python</span><span class="sep">◆</span>
+                <span>Node.js</span><span class="sep">◆</span>
+                <span>Apex</span><span class="sep">◆</span>
+                <span>Fortinet</span><span class="sep">◆</span>
+                <span>Cisco Meraki</span><span class="sep">◆</span>
+                <span>Flow Builder</span><span class="sep">◆</span>
+                <span>GenAI</span><span class="sep">◆</span>
             </div>
+        </div>
+    </div>
 
-            <div class="glass p-8 rounded-3xl flex flex-col items-center text-center hover:border-sky-500/50 transition">
-                <div class="w-16 h-16 mb-6 flex items-center justify-center bg-sky-500/10 rounded-2xl">
-                    <i class="fab fa-salesforce text-4xl text-sky-400"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-4">Salesforce</h3>
-                <p class="text-slate-400 text-sm" data-en="Ecosystem mastery: Flow Builder, SOQL/SOSL, Apex development, and Trailhead Superbadges." data-es="Dominio del ecosistema: Flow Builder, SOQL/SOSL, desarrollo Apex y Superbadges de Trailhead.">Dominio del ecosistema: Flow Builder, SOQL/SOSL, desarrollo Apex y Superbadges de Trailhead.</p>
+    <!-- EXPERTISE -->
+    <section id="expertise" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">01</span>
+                <h2 data-en="Technical Expertise" data-es="Expertise Técnico">Technical Expertise</h2>
             </div>
-
-            <div class="glass p-8 rounded-3xl flex flex-col items-center text-center hover:border-red-500/50 transition">
-                <div class="w-16 h-16 mb-6 flex items-center justify-center bg-red-500/10 rounded-2xl">
-                    <i class="fas fa-shield-halved text-3xl text-red-400"></i>
+            <div class="expertise-grid">
+                <div class="expertise-card card-highlight">
+                    <div class="card-icon"><i class="fas fa-headset"></i></div>
+                    <h3>UC & Contact Center</h3>
+                    <p data-en="Architecture & design of enterprise UC/CC platforms. Presales champion for Avaya, Genesys, Five9, Collab, and Microsoft Teams — across cloud, on-prem, and hybrid deployments." data-es="Arquitectura y diseño de plataformas UC/CC enterprise. Líder de preventa para Avaya, Genesys, Five9, Collab y Microsoft Teams — en cloud, on-premise e híbrido.">Architecture & design of enterprise UC/CC platforms. Presales champion for Avaya, Genesys, Five9, Collab, and Microsoft Teams — across cloud, on-prem, and hybrid deployments.</p>
+                    <div class="card-tags">
+                        <span>Avaya Aura</span><span>Genesys</span><span>Five9</span><span>MS Teams</span><span>Collab</span>
+                    </div>
                 </div>
-                <h3 class="text-xl font-bold mb-4" data-en="Cybersecurity" data-es="Ciberseguridad">Ciberseguridad</h3>
-                <p class="text-slate-400 text-sm" data-en="Security frameworks, network protection, and tools like Fortinet and Checkpoint." data-es="Frameworks de seguridad, protección de redes y herramientas como Fortinet y Checkpoint.">Frameworks de seguridad, protección de redes y herramientas como Fortinet y Checkpoint.</p>
+                <div class="expertise-card">
+                    <div class="card-icon sf-icon"><i class="fab fa-salesforce"></i></div>
+                    <h3>Salesforce</h3>
+                    <p data-en="Flow Builder, SOQL/SOSL, Apex development. Trailhead Ranger with 103 badges and 3 Superbadges. Agentblazer Champion '25." data-es="Flow Builder, SOQL/SOSL, desarrollo Apex. Trailhead Ranger con 103 badges y 3 Superbadges. Agentblazer Champion '25.">Flow Builder, SOQL/SOSL, Apex development. Trailhead Ranger with 103 badges and 3 Superbadges. Agentblazer Champion '25.</p>
+                    <div class="card-tags">
+                        <span>Flow Builder</span><span>Apex</span><span>SOQL</span><span>Trailhead</span>
+                    </div>
+                </div>
+                <div class="expertise-card">
+                    <div class="card-icon ai-icon"><i class="fas fa-robot"></i></div>
+                    <h3>GenAI & Dialogflow CX</h3>
+                    <p data-en="Personal projects exploring conversational AI with Google Dialogflow CX and integrating GenAI capabilities into business workflows." data-es="Proyectos personales explorando IA conversacional con Google Dialogflow CX e integrando capacidades GenAI en flujos de negocio.">Personal projects exploring conversational AI with Google Dialogflow CX and integrating GenAI capabilities into business workflows.</p>
+                    <div class="card-tags">
+                        <span>Dialogflow CX</span><span>GenAI</span><span>NLP</span><span>Automation</span>
+                    </div>
+                </div>
+                <div class="expertise-card">
+                    <div class="card-icon sec-icon"><i class="fas fa-shield-halved"></i></div>
+                    <h3 data-en="Cybersecurity" data-es="Ciberseguridad">Cybersecurity</h3>
+                    <p data-en="Network security frameworks, fraud detection system design. Hands-on experience with Fortinet, Checkpoint, and enterprise security policies." data-es="Frameworks de seguridad de red, diseño de sistemas de detección de fraudes. Experiencia con Fortinet, Checkpoint y políticas de seguridad enterprise.">Network security frameworks, fraud detection system design. Hands-on experience with Fortinet, Checkpoint, and enterprise security policies.</p>
+                    <div class="card-tags">
+                        <span>Fortinet</span><span>Checkpoint</span><span>Fraud Detection</span>
+                    </div>
+                </div>
+                <div class="expertise-card">
+                    <div class="card-icon cloud-icon"><i class="fas fa-cloud"></i></div>
+                    <h3>Cloud & Networking</h3>
+                    <p data-en="AWS Cloud Practitioner certified. Architecture of cloud migrations and hybrid infrastructures. Cisco Meraki, VLANs, subnetting, high availability design." data-es="Certificado AWS Cloud Practitioner. Arquitectura de migraciones cloud e infraestructuras híbridas. Cisco Meraki, VLANs, subnetting, diseño de alta disponibilidad.">AWS Cloud Practitioner certified. Architecture of cloud migrations and hybrid infrastructures. Cisco Meraki, VLANs, subnetting, high availability design.</p>
+                    <div class="card-tags">
+                        <span>AWS</span><span>Azure M365</span><span>Cisco Meraki</span><span>HA Design</span>
+                    </div>
+                </div>
+                <div class="expertise-card">
+                    <div class="card-icon code-icon"><i class="fas fa-code"></i></div>
+                    <h3 data-en="Development" data-es="Desarrollo">Development</h3>
+                    <p data-en="Frontend (HTML/CSS/JS), Python, Node.js, Apex. TalentTech certified. Building automation tools and AI-powered integrations as personal projects." data-es="Frontend (HTML/CSS/JS), Python, Node.js, Apex. Certificado TalentTech. Desarrollando herramientas de automatización e integraciones con IA como proyectos personales.">Frontend (HTML/CSS/JS), Python, Node.js, Apex. TalentTech certified. Building automation tools and AI-powered integrations as personal projects.</p>
+                    <div class="card-tags">
+                        <span>Python</span><span>Node.js</span><span>Apex</span><span>Frontend</span>
+                    </div>
+                </div>
             </div>
+        </div>
+    </section>
 
-            <div class="glass p-8 rounded-3xl flex flex-col items-center text-center hover:border-emerald-500/50 transition">
-                <div class="w-16 h-16 mb-6 flex items-center justify-center bg-emerald-500/10 rounded-2xl">
-                    <i class="fas fa-code text-3xl text-emerald-400"></i>
+    <!-- EXPERIENCE -->
+    <section id="experience" class="section section-dark">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">02</span>
+                <h2 data-en="Professional Experience" data-es="Experiencia Profesional">Professional Experience</h2>
+            </div>
+            <div class="timeline">
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">
+                        <div class="marker-dot active"></div>
+                        <div class="marker-line"></div>
+                    </div>
+                    <div class="timeline-card">
+                        <div class="timeline-header" onclick="toggleExp(this)">
+                            <div class="timeline-meta">
+                                <span class="company-badge">Avaya</span>
+                                <span class="timeline-period">Aug 2023 – <span class="now-badge" data-en="Present" data-es="Presente">Present</span></span>
+                            </div>
+                            <h3 class="timeline-role">APS Technical Consultant — UC & CC Solutions</h3>
+                            <p class="timeline-location"><i class="fas fa-map-marker-alt"></i> Buenos Aires, Argentina</p>
+                            <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+                        </div>
+                        <div class="timeline-body collapsible">
+                            <ul>
+                                <li data-en="Designed comprehensive Avaya Contact Center and UC solutions: Communication Manager, Call Center Elite, Workforce Optimization, Avaya Infinity, Avaya Cloud Office." data-es="Diseñé soluciones integrales de Contact Center y UC de Avaya: Communication Manager, Call Center Elite, Workforce Optimization, Avaya Infinity, Avaya Cloud Office.">Designed comprehensive Avaya Contact Center and UC solutions: Communication Manager, Call Center Elite, Workforce Optimization, Avaya Infinity, Avaya Cloud Office.</li>
+                                <li data-en="Led end-to-end implementation, configuration, and integration of complex telephony platforms adhering to best practices." data-es="Lideré implementaciones end-to-end, configuración e integración de plataformas complejas de telefonía siguiendo mejores prácticas.">Led end-to-end implementation, configuration, and integration of complex telephony platforms adhering to best practices.</li>
+                                <li data-en="Planned seamless migrations and upgrades of existing Avaya systems with minimal downtime and guaranteed data integrity." data-es="Planifiqué migraciones y upgrades de sistemas Avaya existentes con mínimo downtime y garantía de integridad de datos.">Planned seamless migrations and upgrades of existing Avaya systems with minimal downtime and guaranteed data integrity.</li>
+                                <li data-en="Provided advanced Level 3 technical support, troubleshooting critical issues directly with Avaya engineering." data-es="Brindé soporte técnico avanzado Nivel 3, resolviendo problemas críticos directamente con ingeniería de Avaya.">Provided advanced Level 3 technical support, troubleshooting critical issues directly with Avaya engineering.</li>
+                                <li data-en="Conducted technical workshops and training sessions for clients ensuring optimal solution adoption." data-es="Conduje workshops técnicos y sesiones de capacitación para clientes asegurando óptima adopción de la solución.">Conducted technical workshops and training sessions for clients ensuring optimal solution adoption.</li>
+                            </ul>
+                            <div class="timeline-tags">
+                                <span>Avaya Aura CM</span><span>CC Elite</span><span>WFO</span><span>Avaya Infinity</span><span>Cloud Office</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <h3 class="text-xl font-bold mb-4" data-en="Programming" data-es="Programación">Programación</h3>
-                <p class="text-slate-400 text-sm">
-                    <span class="text-white font-mono">Python, Node.js, Apex, Frontend.</span><br>
-                    <span class="mt-2 block" data-en="Automation-focused development." data-es="Desarrollo enfocado en automatización.">Desarrollo enfocado en automatización.</span>
-                </p>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">
+                        <div class="marker-dot"></div>
+                        <div class="marker-line"></div>
+                    </div>
+                    <div class="timeline-card">
+                        <div class="timeline-header" onclick="toggleExp(this)">
+                            <div class="timeline-meta">
+                                <span class="company-badge">DirMOD S.A.</span>
+                                <span class="timeline-period">Jun 2022 – Jul 2023</span>
+                            </div>
+                            <h3 class="timeline-role" data-en="Solution Design Presales" data-es="Diseño de Soluciones Preventa">Solution Design Presales</h3>
+                            <p class="timeline-location"><i class="fas fa-map-marker-alt"></i> Buenos Aires, Argentina</p>
+                            <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+                        </div>
+                        <div class="timeline-body collapsible">
+                            <ul>
+                                <li data-en="Led technical meetings, presentations, and functional demonstrations for corporate clients, consistently achieving technical deal closures." data-es="Lideré reuniones técnicas, presentaciones y demostraciones funcionales para clientes corporativos, logrando cierres técnicos consistentes.">Led technical meetings, presentations, and functional demonstrations for corporate clients, consistently achieving technical deal closures.</li>
+                                <li data-en="Developed comprehensive technical proposals, specifications, and responses to RFIs & RFPs." data-es="Desarrollé propuestas técnicas integrales, especificaciones y respuestas a RFIs y RFPs.">Developed comprehensive technical proposals, specifications, and responses to RFIs & RFPs.</li>
+                                <li data-en="Cultivated long-term strategic relationships with key accounts, acting as a trusted advisor." data-es="Cultivé relaciones estratégicas a largo plazo con cuentas clave, actuando como asesor de confianza.">Cultivated long-term strategic relationships with key accounts, acting as a trusted advisor.</li>
+                                <li data-en="Proposed innovative technologies to enhance the company's service offerings and maintain competitive edge." data-es="Propuse tecnologías innovadoras para mejorar la oferta de servicios de la empresa y mantener ventaja competitiva.">Proposed innovative technologies to enhance the company's service offerings and maintain competitive edge.</li>
+                            </ul>
+                            <div class="timeline-tags">
+                                <span>RFI/RFP</span><span>Presales</span><span>Cloud UC</span><span>Deal Closure</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">
+                        <div class="marker-dot"></div>
+                        <div class="marker-line"></div>
+                    </div>
+                    <div class="timeline-card">
+                        <div class="timeline-header" onclick="toggleExp(this)">
+                            <div class="timeline-meta">
+                                <span class="company-badge">Lumen Technologies</span>
+                                <span class="timeline-period">Aug 2021 – Jun 2022</span>
+                            </div>
+                            <h3 class="timeline-role">UC & CC Solution Architect — LatAm</h3>
+                            <p class="timeline-location"><i class="fas fa-map-marker-alt"></i> Argentina (Regional)</p>
+                            <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+                        </div>
+                        <div class="timeline-body collapsible">
+                            <ul>
+                                <li data-en="Defined architecture frameworks for new company solutions including hardware/software requirements, IP addressing, security, bandwidth, and high availability." data-es="Definí frameworks de arquitectura para nuevas soluciones incluyendo requerimientos de hardware/software, direccionamiento IP, seguridad, ancho de banda y alta disponibilidad.">Defined architecture frameworks for new company solutions including hardware/software requirements, IP addressing, security, bandwidth, and high availability.</li>
+                                <li data-en="Led implementation of UC solutions (Microsoft Teams, Avaya) and CC solutions (Collab, Genesys, Five9, Avaya) across LatAm." data-es="Lideré implementación de soluciones UC (Microsoft Teams, Avaya) y CC (Collab, Genesys, Five9, Avaya) en toda LatAm.">Led implementation of UC solutions (Microsoft Teams, Avaya) and CC solutions (Collab, Genesys, Five9, Avaya) across LatAm.</li>
+                                <li data-en="Served as regional technical reference for UC and CC products, coordinating with multiple vendors." data-es="Actué como referente técnico regional de productos UC y CC, coordinando con múltiples vendors.">Served as regional technical reference for UC and CC products, coordinating with multiple vendors.</li>
+                                <li data-en="Certified in Avaya, Microsoft Teams, and Collab platforms." data-es="Certificado en plataformas Avaya, Microsoft Teams y Collab.">Certified in Avaya, Microsoft Teams, and Collab platforms.</li>
+                            </ul>
+                            <div class="timeline-tags">
+                                <span>LatAm</span><span>Genesys</span><span>Five9</span><span>MS Teams</span><span>Architecture</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">
+                        <div class="marker-dot"></div>
+                        <div class="marker-line"></div>
+                    </div>
+                    <div class="timeline-card">
+                        <div class="timeline-header" onclick="toggleExp(this)">
+                            <div class="timeline-meta">
+                                <span class="company-badge">Inside One S.A.</span>
+                                <span class="timeline-period">Aug 2014 – Jul 2021 · 6y 11m</span>
+                            </div>
+                            <h3 class="timeline-role" data-en="Engineering & Solutions Manager → Presales Engineer" data-es="Gerente de Ingeniería → Ingeniero de Preventa">Engineering & Solutions Manager → Presales Engineer</h3>
+                            <p class="timeline-location"><i class="fas fa-map-marker-alt"></i> Buenos Aires, Argentina</p>
+                            <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+                        </div>
+                        <div class="timeline-body collapsible">
+                            <ul>
+                                <li data-en="Grew from Presales Engineer to Engineering & Solutions Manager over nearly 7 years, leading a full engineering team." data-es="Crecí de Ingeniero de Preventa a Gerente de Ingeniería en casi 7 años, liderando un equipo completo de ingeniería.">Grew from Presales Engineer to Engineering & Solutions Manager over nearly 7 years, leading a full engineering team.</li>
+                                <li data-en="Oversaw architectural frameworks for new solutions with focus on robustness, scalability, and high availability." data-es="Supervisé frameworks arquitectónicos para nuevas soluciones con foco en robustez, escalabilidad y alta disponibilidad.">Oversaw architectural frameworks for new solutions with focus on robustness, scalability, and high availability.</li>
+                                <li data-en="Conducted technical/commercial surveys, solution quotations, and product demonstrations for Avaya Aura, IP Office, Cisco Meraki, Extreme, and Collab." data-es="Realicé relevamientos técnico-comerciales, cotizaciones y demostraciones para Avaya Aura, IP Office, Cisco Meraki, Extreme y Collab.">Conducted technical/commercial surveys, solution quotations, and product demonstrations for Avaya Aura, IP Office, Cisco Meraki, Extreme, and Collab.</li>
+                                <li data-en="Developed fraud detection systems and implemented monitoring tools to ensure platform health." data-es="Desarrollé sistemas de detección de fraudes e implementé herramientas de monitoreo para garantizar la salud de las plataformas.">Developed fraud detection systems and implemented monitoring tools to ensure platform health.</li>
+                                <li data-en="Created technical manuals and training materials; provided Level 3 support for client platforms." data-es="Creé manuales técnicos y materiales de capacitación; brindé soporte Nivel 3 para plataformas de clientes.">Created technical manuals and training materials; provided Level 3 support for client platforms.</li>
+                            </ul>
+                            <div class="timeline-tags">
+                                <span>Avaya Aura</span><span>IP Office</span><span>Cisco Meraki</span><span>Fraud Detection</span><span>L3 Support</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">
+                        <div class="marker-dot"></div>
+                        <div class="marker-line"></div>
+                    </div>
+                    <div class="timeline-card">
+                        <div class="timeline-header" onclick="toggleExp(this)">
+                            <div class="timeline-meta">
+                                <span class="company-badge">Avaya</span>
+                                <span class="timeline-period">Sep 2009 – Dec 2011</span>
+                            </div>
+                            <h3 class="timeline-role">Customer Support Engineer</h3>
+                            <p class="timeline-location"><i class="fas fa-map-marker-alt"></i> Buenos Aires, Argentina</p>
+                            <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+                        </div>
+                        <div class="timeline-body collapsible">
+                            <ul>
+                                <li data-en="Level 3 support for Avaya clients. Administered telephony systems: TDM, IP, SIP, trunks, real-time troubleshooting, and lab testing." data-es="Soporte Nivel 3 para clientes de Avaya. Administración de sistemas de telefonía: TDM, IP, SIP, troncales, troubleshooting en tiempo real y testeo en laboratorio.">Level 3 support for Avaya clients. Administered telephony systems: TDM, IP, SIP, trunks, real-time troubleshooting, and lab testing.</li>
+                                <li data-en="Linux administrator: user management, network trace analysis, installation and configuration. Platform: Communication Manager." data-es="Administrador Linux: gestión de usuarios, análisis de trazas de red, instalación y configuración. Plataforma: Communication Manager.">Linux administrator: user management, network trace analysis, installation and configuration. Platform: Communication Manager.</li>
+                            </ul>
+                            <div class="timeline-tags">
+                                <span>TDM/IP/SIP</span><span>Linux Admin</span><span>Communication Manager</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">
+                        <div class="marker-dot"></div>
+                        <div class="marker-line"></div>
+                    </div>
+                    <div class="timeline-card">
+                        <div class="timeline-header" onclick="toggleExp(this)">
+                            <div class="timeline-meta">
+                                <span class="company-badge">Techint</span>
+                                <span class="timeline-period">Jan 2005 – Aug 2009 · 4y 8m</span>
+                            </div>
+                            <h3 class="timeline-role" data-en="IT Project Manager → Help Desk Supervisor" data-es="Gerente de Proyecto IT → Supervisor Help Desk">IT Project Manager → Help Desk Supervisor</h3>
+                            <p class="timeline-location"><i class="fas fa-map-marker-alt"></i> Argentina | Houston | New York | Calgary</p>
+                            <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+                        </div>
+                        <div class="timeline-body collapsible">
+                            <ul>
+                                <li data-en="Led international IT migration projects across Argentina, USA (Houston, New York), Canada (Calgary), and Venezuela. Coordinated large-scale OS migrations (Novell to Windows), server deployments, and Active Directory implementations." data-es="Lideré proyectos internacionales de migración IT en Argentina, USA (Houston, Nueva York), Canadá (Calgary) y Venezuela. Coordiné migraciones masivas de OS (Novell a Windows), despliegues de servidores e implementaciones de Active Directory.">Led international IT migration projects across Argentina, USA (Houston, New York), Canada (Calgary), and Venezuela. Coordinated large-scale OS migrations (Novell to Windows), server deployments, and Active Directory implementations.</li>
+                                <li data-en="Supervised Help Desk team; created SOPs, trained staff, and provided L1-L3 support across multiple sites." data-es="Supervisé equipo de Help Desk; creé SOPs, capacité al personal y brindé soporte L1-L3 en múltiples sitios.">Supervised Help Desk team; created SOPs, trained staff, and provided L1-L3 support across multiple sites.</li>
+                            </ul>
+                            <div class="timeline-tags">
+                                <span>Project Management</span><span>International</span><span>AD Migration</span><span>Server Admin</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ACHIEVEMENTS -->
+    <section id="achievements" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">03</span>
+                <h2 data-en="Key Achievements" data-es="Logros Clave">Key Achievements</h2>
+            </div>
+            <div class="achievements-grid">
+                <div class="achievement-card">
+                    <div class="achievement-icon"><i class="fas fa-globe"></i></div>
+                    <h3 data-en="5-Country Rollout" data-es="Despliegue en 5 Países">5-Country Rollout</h3>
+                    <p data-en="Successfully implemented Contact Center and UC nodes across 5 different countries, coordinating seamlessly with diverse international stakeholders." data-es="Implementé con éxito nodos de Contact Center y UC en 5 países distintos, coordinando con stakeholders internacionales.">Successfully implemented Contact Center and UC nodes across 5 different countries, coordinating seamlessly with diverse international stakeholders.</p>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-icon"><i class="fas fa-building"></i></div>
+                    <h3>AON Global Board Approval</h3>
+                    <p data-en="Engaged as Cloud Solutions Architect for AON, culminating in the presentation and approval of the designed architecture by AON's global board of directors." data-es="Participé como Arquitecto de Soluciones Cloud para AON, logrando la aprobación de la arquitectura diseñada por el directorio global de AON.">Engaged as Cloud Solutions Architect for AON, culminating in the presentation and approval of the designed architecture by AON's global board of directors.</p>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-icon"><i class="fas fa-shield-halved"></i></div>
+                    <h3 data-en="Fraud Detection System" data-es="Sistema de Detección de Fraudes">Fraud Detection System</h3>
+                    <p data-en="Developed and implemented fraud detection systems from scratch, significantly enhancing client security posture." data-es="Desarrollé e implementé sistemas de detección de fraudes desde cero, mejorando significativamente la postura de seguridad de los clientes.">Developed and implemented fraud detection systems from scratch, significantly enhancing client security posture.</p>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                    <h3 data-en="Zero-Downtime Migrations" data-es="Migraciones Sin Downtime">Zero-Downtime Migrations</h3>
+                    <p data-en="Orchestrated multiple complex system migrations ensuring minimal disruption and full data integrity across enterprise environments." data-es="Orquesté múltiples migraciones complejas de sistemas garantizando mínima interrupción e integridad total de datos.">Orchestrated multiple complex system migrations ensuring minimal disruption and full data integrity across enterprise environments.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section id="certifications" class="section section-dark">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">04</span>
+                <h2 data-en="Certifications & Education" data-es="Certificaciones y Educación">Certifications & Education</h2>
+            </div>
+            <div class="certs-layout">
+                <div class="salesforce-highlight">
+                    <div class="sf-header">
+                        <i class="fab fa-salesforce sf-big-icon"></i>
+                        <div>
+                            <h3>Salesforce Trailhead</h3>
+                            <p class="sf-status">Ranger · Agentblazer Champion '25</p>
+                        </div>
+                    </div>
+                    <div class="sf-stats">
+                        <div class="sf-stat"><span class="sf-num">103</span><span data-en="Badges" data-es="Badges">Badges</span></div>
+                        <div class="sf-stat"><span class="sf-num">62,350</span><span>Points</span></div>
+                        <div class="sf-stat"><span class="sf-num">17</span><span>Trails</span></div>
+                        <div class="sf-stat"><span class="sf-num">3</span><span>Superbadges</span></div>
+                    </div>
+                    <div class="superbadges">
+                        <div class="superbadge-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Superbadge: Flow Fundamentals</span>
+                            <small>May 2026</small>
+                        </div>
+                        <div class="superbadge-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Superbadge: Record-Triggered Flow</span>
+                            <small>May 2026</small>
+                        </div>
+                        <div class="superbadge-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Superbadge: Object Relationships</span>
+                            <small>Mar 2026</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="certs-list">
+                    <div class="cert-item">
+                        <span class="cert-year">2025</span>
+                        <div class="cert-info">
+                            <span class="cert-name">GCBA TalentTech — Salesforce Administrator</span>
+                            <span class="cert-issuer">TalentTech / GCBA</span>
+                        </div>
+                    </div>
+                    <div class="cert-item">
+                        <span class="cert-year">2025</span>
+                        <div class="cert-info">
+                            <span class="cert-name">Avaya Services Data Practitioner — Analytics Specialist II</span>
+                            <span class="cert-issuer">Avaya</span>
+                        </div>
+                    </div>
+                    <div class="cert-item">
+                        <span class="cert-year">2025</span>
+                        <div class="cert-info">
+                            <span class="cert-name">GCBA TalentTech — Introduction to Python</span>
+                            <span class="cert-issuer">TalentTech / GCBA</span>
+                        </div>
+                    </div>
+                    <div class="cert-item">
+                        <span class="cert-year">2025</span>
+                        <div class="cert-info">
+                            <span class="cert-name">GCBA TalentTech — Backend Node.js Developer</span>
+                            <span class="cert-issuer">TalentTech / GCBA</span>
+                        </div>
+                    </div>
+                    <div class="cert-item">
+                        <span class="cert-year">2024</span>
+                        <div class="cert-info">
+                            <span class="cert-name">Frontend Developer</span>
+                            <span class="cert-issuer">Digital House</span>
+                        </div>
+                    </div>
+                    <div class="cert-item">
+                        <span class="cert-year">2023</span>
+                        <div class="cert-info">
+                            <span class="cert-name">AWS Cloud Practitioner</span>
+                            <span class="cert-issuer">Amazon Web Services</span>
+                        </div>
+                    </div>
+                    <div class="cert-item">
+                        <span class="cert-year">2022</span>
+                        <div class="cert-info">
+                            <span class="cert-name">Microsoft M100 / Microsoft Teams</span>
+                            <span class="cert-issuer">Microsoft</span>
+                        </div>
+                    </div>
+                    <div class="cert-item">
+                        <span class="cert-year">2021</span>
+                        <div class="cert-info">
+                            <span class="cert-name">Cybersecurity Fundamentals: Networks</span>
+                            <span class="cert-issuer">Industry Certification</span>
+                        </div>
+                    </div>
+                    <div class="cert-item">
+                        <span class="cert-year">2021</span>
+                        <div class="cert-info">
+                            <span class="cert-name">Scrum Fundamentals</span>
+                            <span class="cert-issuer">SCRUMstudy</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="education-row">
+                <div class="edu-card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <div>
+                        <h4>System Analyst</h4>
+                        <p>Universidad de Belgrano · 2016 – Present</p>
+                    </div>
+                </div>
+                <div class="edu-card">
+                    <i class="fas fa-laptop-code"></i>
+                    <div>
+                        <h4>Frontend Developer</h4>
+                        <p>Digital House · 2024 – 2026</p>
+                    </div>
+                </div>
+                <div class="edu-card">
+                    <i class="fas fa-cloud"></i>
+                    <div>
+                        <h4>Salesforce Administrator</h4>
+                        <p>GCBA TalentTech · 2025 – 2026</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PERSONAL PROJECTS -->
+    <section id="projects" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">05</span>
+                <h2 data-en="Personal Projects" data-es="Proyectos Personales">Personal Projects</h2>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card project-featured">
+                    <div class="project-glow"></div>
+                    <div class="project-header">
+                        <div class="project-icon"><i class="fas fa-robot"></i></div>
+                        <span class="project-status" data-en="In Progress" data-es="En Progreso">In Progress</span>
+                    </div>
+                    <h3>Dialogflow CX Conversational Agent</h3>
+                    <p data-en="Building an enterprise-grade conversational AI agent using Google Dialogflow CX. Exploring NLU flows, webhook integrations, and multi-turn conversation design for Contact Center automation use cases." data-es="Construyendo un agente conversacional de IA enterprise usando Google Dialogflow CX. Explorando flujos NLU, integraciones webhook y diseño de conversaciones multi-turno para casos de automatización de Contact Center.">Building an enterprise-grade conversational AI agent using Google Dialogflow CX. Exploring NLU flows, webhook integrations, and multi-turn conversation design for Contact Center automation use cases.</p>
+                    <div class="project-tech">
+                        <span>Dialogflow CX</span><span>Node.js</span><span>Webhooks</span><span>NLU</span><span>GenAI</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon sf-proj-icon"><i class="fab fa-salesforce"></i></div>
+                        <span class="project-status" data-en="In Progress" data-es="En Progreso">In Progress</span>
+                    </div>
+                    <h3>Salesforce Automation & Dev</h3>
+                    <p data-en="Personal Salesforce org: building custom Flow automations, Apex triggers, and data models. Working toward advanced developer certifications while integrating real-world UC/CC scenarios." data-es="Org personal de Salesforce: construyendo automatizaciones Flow personalizadas, triggers Apex y modelos de datos. Trabajando hacia certificaciones avanzadas mientras integro escenarios reales de UC/CC.">Personal Salesforce org: building custom Flow automations, Apex triggers, and data models. Working toward advanced developer certifications while integrating real-world UC/CC scenarios.</p>
+                    <div class="project-tech">
+                        <span>Salesforce</span><span>Apex</span><span>Flow Builder</span><span>SOQL</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon web-proj-icon"><i class="fas fa-code"></i></div>
+                        <span class="project-status" data-en="Live" data-es="En Vivo">Live</span>
+                    </div>
+                    <h3 data-en="Technical Portfolio Website" data-es="Portfolio Web Técnico">Technical Portfolio Website</h3>
+                    <p data-en="This very site — designed and built from scratch using HTML, CSS, and vanilla JS. Bilingual (EN/ES), responsive, with persistent analytics, PDF export, and a dark tech aesthetic." data-es="Este mismo sitio — diseñado y construido desde cero usando HTML, CSS y JS vanilla. Bilingüe (EN/ES), responsivo, con analytics persistente, exportación a PDF y estética tech oscura.">This very site — designed and built from scratch using HTML, CSS, and vanilla JS. Bilingual (EN/ES), responsive, with persistent analytics, PDF export, and a dark tech aesthetic.</p>
+                    <div class="project-tech">
+                        <span>HTML/CSS</span><span>JavaScript</span><span>GitHub Pages</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS BAR -->
+    <section class="section section-dark">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">06</span>
+                <h2 data-en="Skills Proficiency" data-es="Nivel de Habilidades">Skills Proficiency</h2>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-group">
+                    <h4 data-en="UC & Contact Center" data-es="UC y Contact Center">UC & Contact Center</h4>
+                    <div class="skill-bar"><span data-en="Avaya Aura / IP Office" data-es="Avaya Aura / IP Office">Avaya Aura / IP Office</span><div class="bar"><div class="bar-fill" style="--pct:98%"></div></div></div>
+                    <div class="skill-bar"><span>Genesys / Five9</span><div class="bar"><div class="bar-fill" style="--pct:88%"></div></div></div>
+                    <div class="skill-bar"><span>Microsoft Teams UC</span><div class="bar"><div class="bar-fill" style="--pct:85%"></div></div></div>
+                    <div class="skill-bar"><span>Collab / Asterisk</span><div class="bar"><div class="bar-fill" style="--pct:80%"></div></div></div>
+                </div>
+                <div class="skill-group">
+                    <h4 data-en="Development & Cloud" data-es="Desarrollo y Cloud">Development & Cloud</h4>
+                    <div class="skill-bar"><span>Salesforce / Apex</span><div class="bar"><div class="bar-fill" style="--pct:82%"></div></div></div>
+                    <div class="skill-bar"><span>Python</span><div class="bar"><div class="bar-fill" style="--pct:70%"></div></div></div>
+                    <div class="skill-bar"><span>Node.js</span><div class="bar"><div class="bar-fill" style="--pct:68%"></div></div></div>
+                    <div class="skill-bar"><span>AWS Cloud</span><div class="bar"><div class="bar-fill" style="--pct:75%"></div></div></div>
+                </div>
+                <div class="skill-group">
+                    <h4 data-en="Soft Skills" data-es="Habilidades Blandas">Soft Skills</h4>
+                    <div class="skill-bar"><span data-en="Presales / Deal Closure" data-es="Preventa / Cierre de Deals">Presales / Deal Closure</span><div class="bar"><div class="bar-fill" style="--pct:97%"></div></div></div>
+                    <div class="skill-bar"><span data-en="Technical Presentations" data-es="Presentaciones Técnicas">Technical Presentations</span><div class="bar"><div class="bar-fill" style="--pct:95%"></div></div></div>
+                    <div class="skill-bar"><span data-en="RFI/RFP Responses" data-es="Respuestas RFI/RFP">RFI/RFP Responses</span><div class="bar"><div class="bar-fill" style="--pct:93%"></div></div></div>
+                    <div class="skill-bar"><span data-en="English (Advanced)" data-es="Inglés (Avanzado)">English (Advanced)</span><div class="bar"><div class="bar-fill" style="--pct:90%"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">07</span>
+                <h2 data-en="Get In Touch" data-es="Contacto">Get In Touch</h2>
+            </div>
+            <div class="contact-layout">
+                <div class="contact-copy">
+                    <h3 data-en="Let's build something great together." data-es="Construyamos algo grande juntos.">Let's build something great together.</h3>
+                    <p data-en="Open to Presales, Solution Architecture, and Salesforce/GenAI roles. Based in Buenos Aires, Argentina. Working currently with a US company." data-es="Abierto a roles de Preventa, Arquitectura de Soluciones y Salesforce/GenAI. Basado en Buenos Aires, Argentina. Trabajando actualmente con empresa de USA.">Open to Presales, Solution Architecture, and Salesforce/GenAI roles. Based in Buenos Aires, Argentina. Working currently with a US company.</p>
+                    <div class="contact-links">
+                        <a href="mailto:ssosa17@gmail.com" class="contact-link">
+                            <i class="fas fa-envelope"></i>
+                            <span>ssosa17@gmail.com</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/ssosa17/" target="_blank" class="contact-link">
+                            <i class="fab fa-linkedin"></i>
+                            <span>linkedin.com/in/ssosa17</span>
+                        </a>
+                        <a href="https://www.salesforce.com/trailblazer/sebastianadriansosa" target="_blank" class="contact-link">
+                            <i class="fab fa-salesforce"></i>
+                            <span>Trailblazer Profile</span>
+                        </a>
+                        <a href="tel:" class="contact-link">
+                            <i class="fas fa-phone"></i>
+                            <span>(+54) 9 11 5760 2962</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="contact-action">
+                    <button onclick="downloadCV()" class="download-btn">
+                        <div class="download-btn-icon"><i class="fas fa-file-pdf"></i></div>
+                        <div class="download-btn-text">
+                            <span data-en="Download Technical CV" data-es="Descargar CV Técnico">Download Technical CV</span>
+                            <small data-en="PDF · Updated 2026" data-es="PDF · Actualizado 2026">PDF · Updated 2026</small>
+                        </div>
+                        <i class="fas fa-arrow-down"></i>
+                    </button>
+                    <p class="location-note"><i class="fas fa-map-marker-alt"></i> Villa Devoto, CABA, Argentina</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- FOOTER -->
-    <footer class="py-20 bg-black text-center px-6 border-t border-slate-900">
-        <div class="flex flex-wrap justify-center gap-8 text-slate-400 mb-8">
-            <a href="mailto:ssosa17@gmail.com" class="hover:text-blue-400 transition"><i class="fas fa-envelope"></i></a>
-            <a href="https://www.linkedin.com/in/ssosa17/" target="_blank" class="hover:text-blue-400 transition"><i class="fab fa-linkedin"></i></a>
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-logo"><span class="logo-bracket">[</span>SS<span class="logo-bracket">]</span></div>
+            <p class="footer-copy">© 2026 Sebastian Adrián Sosa · Built with HTML, CSS & JS</p>
+            <div class="footer-socials">
+                <a href="mailto:ssosa17@gmail.com"><i class="fas fa-envelope"></i></a>
+                <a href="https://www.linkedin.com/in/ssosa17/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            </div>
         </div>
-        <p class="text-xs text-slate-600 uppercase tracking-widest">© 2026 Sebastian Sosa</p>
     </footer>
 
     <!-- LIKE BUTTON -->
-    <div class="fixed bottom-10 right-10 z-50">
-        <button onclick="addLike()" class="bg-rose-600 w-14 h-14 rounded-2xl shadow-2xl flex items-center justify-center transition active:scale-90 relative">
-            <i class="fas fa-heart text-white"></i>
-            <span id="like-count" class="absolute -top-2 -right-2 bg-white text-rose-600 text-[10px] font-bold px-2 py-0.5 rounded-full">0</span>
+    <div class="fab-like">
+        <button onclick="addLike()" id="like-btn" class="like-btn" title="Like this portfolio">
+            <i class="fas fa-heart"></i>
+            <span id="like-count">0</span>
         </button>
     </div>
 
-    <!-- ESTO ES LO QUE TE FALTABA: Conexión al archivo JS -->
+    <!-- PDF LOADING OVERLAY -->
+    <div id="pdf-overlay" class="pdf-overlay hidden">
+        <div class="pdf-loader">
+            <div class="loader-spinner"></div>
+            <p data-en="Generating PDF..." data-es="Generando PDF...">Generating PDF...</p>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
