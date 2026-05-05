@@ -194,292 +194,277 @@ async function downloadCV() {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF('p', 'mm', 'a4');
         const W = 210, H = 297;
-        const margin = 20;
+        const sidebarW = 65;
+        const sm = 12; // sidebar margin
+        const rx = sidebarW + 10; // right column x start
+        const rightW = W - rx - 10; // usable width for right column
 
         // Colors
-        const bg = [3, 7, 18];
+        const bg     = [3, 7, 18];
+        const dark2  = [7, 15, 31];
         const accent = [56, 189, 248];
-        const white = [226, 232, 240];
-        const muted = [100, 116, 139];
-        const dark2 = [7, 15, 31];
+        const white  = [226, 232, 240];
+        const muted  = [100, 116, 139];
 
-        // Background
+        // ---- BACKGROUND ----
         doc.setFillColor(...bg);
         doc.rect(0, 0, W, H, 'F');
-
-        // Left sidebar
         doc.setFillColor(...dark2);
-        doc.rect(0, 0, 65, H, 'F');
-
-        // Accent top bar
+        doc.rect(0, 0, sidebarW, H, 'F');
         doc.setFillColor(...accent);
         doc.rect(0, 0, W, 3, 'F');
 
-        let y = 20;
-
-        // Name
-        doc.setFont('helvetica', 'bold');
-        doc.setFontSize(22);
-        doc.setTextColor(...accent);
-        doc.text('Sebastian', margin, y);
-        y += 8;
-        doc.setFontSize(22);
-        doc.text('Sosa', margin, y);
-        y += 8;
-
-        // Title
-        doc.setFont('helvetica', 'normal');
-        doc.setFontSize(7.5);
-        doc.setTextColor(...muted);
-        doc.text('Solution Architect & Presales', margin, y);
-        y += 4;
-        doc.text('UC/CC | Salesforce | GenAI', margin, y);
-        y += 10;
-
-        // Divider
-        doc.setDrawColor(...accent);
-        doc.setLineWidth(0.3);
-        doc.line(margin, y, 58, y);
-        y += 7;
-
-        // Contact
-        doc.setFont('helvetica', 'bold');
-        doc.setFontSize(7);
-        doc.setTextColor(...accent);
-        doc.text('CONTACT', margin, y);
-        y += 5;
-
-        const contacts = [
-            ['✉', 'ssosa17@gmail.com'],
-            ['☎', '+54 9 11 5760 2962'],
-            ['in', 'linkedin.com/in/ssosa17'],
-            ['☁', 'Trailblazer: sebastianadriansosa'],
-            ['⌂', 'Villa Devoto, CABA, Argentina']
-        ];
-        doc.setFont('helvetica', 'normal');
-        doc.setFontSize(6.5);
-        doc.setTextColor(...white);
-        contacts.forEach(([icon, text]) => {
+        // ---- HELPERS ----
+        function sidebarDivider(yp) {
+            doc.setDrawColor(...accent);
+            doc.setLineWidth(0.3);
+            doc.line(sm, yp, sidebarW - 4, yp);
+            return yp + 6;
+        }
+        function sidebarSection(label, yp) {
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(7);
             doc.setTextColor(...accent);
-            doc.text(icon, margin, y);
-            doc.setTextColor(...white);
-            doc.text(text, margin + 5, y);
-            y += 4.5;
-        });
-        y += 4;
+            doc.text(label, sm, yp);
+            return yp + 5;
+        }
+        function rightHeader(label, yp) {
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(7.5);
+            doc.setTextColor(...accent);
+            doc.text(label, rx, yp);
+            yp += 2;
+            doc.setDrawColor(...accent);
+            doc.setLineWidth(0.3);
+            doc.line(rx, yp, W - 10, yp);
+            return yp + 5;
+        }
 
-        // Divider
-        doc.setDrawColor(...accent);
-        doc.line(margin, y, 58, y);
-        y += 7;
+        // =====================
+        // LEFT SIDEBAR
+        // =====================
+        let y = 15;
 
-        // Salesforce
         doc.setFont('helvetica', 'bold');
-        doc.setFontSize(7);
+        doc.setFontSize(20);
         doc.setTextColor(...accent);
-        doc.text('SALESFORCE TRAILHEAD', margin, y);
-        y += 5;
+        doc.text('Sebastian', sm, y); y += 7;
+        doc.text('Sosa', sm, y);     y += 7;
+
         doc.setFont('helvetica', 'normal');
         doc.setFontSize(6.5);
+        doc.setTextColor(...muted);
+        doc.text('Solution Architect & Presales', sm, y); y += 3.8;
+        doc.text('UC/CC | Salesforce | GenAI', sm, y);    y += 7;
+
+        y = sidebarDivider(y);
+
+        // CONTACT
+        y = sidebarSection('CONTACT', y);
+        doc.setFontSize(6.3);
+        const contacts = [
+            { lbl: 'Email:',    val: 'ssosa17@gmail.com' },
+            { lbl: 'Phone:',    val: '+54 9 11 5760 2962' },
+            { lbl: 'LinkedIn:', val: 'linkedin.com/in/ssosa17' },
+            { lbl: 'Trail:',    val: 'sebastianadriansosa' },
+            { lbl: 'Location:', val: 'Villa Devoto, CABA, Argentina' },
+        ];
+        contacts.forEach(({ lbl, val }) => {
+            doc.setFont('helvetica', 'bold');
+            doc.setTextColor(...accent);
+            doc.text(lbl, sm, y);
+            doc.setFont('helvetica', 'normal');
+            doc.setTextColor(...white);
+            const vLines = doc.splitTextToSize(val, sidebarW - sm - 2);
+            doc.text(vLines, sm, y + 3.5);
+            y += 3.5 + vLines.length * 3.5 + 1.5;
+        });
+        y += 2;
+
+        y = sidebarDivider(y);
+
+        // SALESFORCE TRAILHEAD
+        y = sidebarSection('SALESFORCE TRAILHEAD', y);
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(6.3);
         doc.setTextColor(...white);
-        const sfData = [
-            'Ranger · Agentblazer Champion \'25',
-            '103 Badges · 62,350 Points',
+        [
+            "Ranger - Agentblazer Champion '25",
+            '103 Badges - 62,350 Points',
             '3 Superbadges',
             'Superbadge: Flow Fundamentals',
             'Superbadge: Record-Triggered Flow',
-            'Superbadge: Object Relationships'
-        ];
-        sfData.forEach(line => { doc.text(line, margin, y); y += 4.2; });
+            'Superbadge: Object Relationships',
+        ].forEach(line => {
+            const w = doc.splitTextToSize(line, sidebarW - sm - 2);
+            doc.text(w, sm, y);
+            y += w.length * 3.8;
+        });
         y += 4;
 
-        // Divider
-        doc.setDrawColor(...accent);
-        doc.line(margin, y, 58, y);
-        y += 7;
+        y = sidebarDivider(y);
 
-        // Skills sidebar
-        doc.setFont('helvetica', 'bold');
-        doc.setFontSize(7);
-        doc.setTextColor(...accent);
-        doc.text('TECH SKILLS', margin, y);
-        y += 5;
+        // TECH SKILLS
+        y = sidebarSection('TECH SKILLS', y);
         doc.setFont('helvetica', 'normal');
-        doc.setFontSize(6.5);
+        doc.setFontSize(6.3);
         doc.setTextColor(...white);
-        const skills = ['Avaya Aura / IP Office', 'Genesys / Five9', 'Microsoft Teams', 'Salesforce / Apex', 'Dialogflow CX', 'Python · Node.js', 'AWS Cloud', 'Cisco Meraki', 'Fortinet Security', 'SOQL / Flow Builder'];
-        skills.forEach(s => { doc.text('• ' + s, margin, y); y += 4; });
-
+        [
+            'Avaya Aura / IP Office', 'Genesys / Five9',
+            'Microsoft Teams',        'Salesforce / Apex',
+            'Dialogflow CX',          'Python / Node.js',
+            'AWS Cloud',              'Cisco Meraki',
+            'Fortinet Security',      'SOQL / Flow Builder',
+        ].forEach(s => { doc.text('- ' + s, sm, y); y += 3.8; });
         y += 4;
-        doc.setDrawColor(...accent);
-        doc.line(margin, y, 58, y);
-        y += 7;
 
-        // Languages
-        doc.setFont('helvetica', 'bold');
-        doc.setFontSize(7);
-        doc.setTextColor(...accent);
-        doc.text('LANGUAGES', margin, y);
-        y += 5;
+        y = sidebarDivider(y);
+
+        // LANGUAGES
+        y = sidebarSection('LANGUAGES', y);
         doc.setFont('helvetica', 'normal');
-        doc.setFontSize(6.5);
+        doc.setFontSize(6.3);
         doc.setTextColor(...white);
-        doc.text('Spanish — Native', margin, y); y += 4;
-        doc.text('English — Advanced (C1)', margin, y);
+        doc.text('Spanish - Native', sm, y);         y += 3.8;
+        doc.text('English - Advanced (C1)', sm, y);
 
-        // ---- RIGHT COLUMN ----
-        const rx = 75; // right column x start
-        let ry = 15;
+        // =====================
+        // RIGHT COLUMN
+        // =====================
+        let ry = 12;
 
-        // Summary
-        doc.setFont('helvetica', 'bold');
-        doc.setFontSize(7.5);
-        doc.setTextColor(...accent);
-        doc.text('PROFESSIONAL SUMMARY', rx, ry);
-        ry += 5;
+        // PROFESSIONAL SUMMARY
+        ry = rightHeader('PROFESSIONAL SUMMARY', ry);
         doc.setFont('helvetica', 'normal');
         doc.setFontSize(6.8);
         doc.setTextColor(...white);
-        const summary = doc.splitTextToSize('Senior Presales & Solution Architect with 14+ years of experience designing Unified Communications and Contact Center solutions across 5 countries. Proven track record of closing technical deals, developing winning proposals, and building strategic client relationships. Currently expanding into Salesforce ecosystem, GenAI, Dialogflow CX, and full-stack development.', W - rx - margin);
-        doc.text(summary, rx, ry);
-        ry += summary.length * 4.2 + 6;
+        const sumLines = doc.splitTextToSize(
+            'Senior Presales & Solution Architect with 14+ years of experience designing Unified Communications and Contact Center solutions across 5 countries. Proven track record of closing technical deals, developing winning proposals, and building strategic client relationships. Currently expanding into Salesforce ecosystem, GenAI, Dialogflow CX, and full-stack development.',
+            rightW
+        );
+        doc.text(sumLines, rx, ry);
+        ry += sumLines.length * 4 + 6;
 
-        // Experience
-        doc.setFont('helvetica', 'bold');
-        doc.setFontSize(7.5);
-        doc.setTextColor(...accent);
-        doc.text('PROFESSIONAL EXPERIENCE', rx, ry);
-        ry += 2;
-        doc.setDrawColor(...accent);
-        doc.setLineWidth(0.3);
-        doc.line(rx, ry, W - margin, ry);
-        ry += 6;
+        // PROFESSIONAL EXPERIENCE
+        ry = rightHeader('PROFESSIONAL EXPERIENCE', ry);
 
         const experiences = [
             {
-                role: 'APS Technical Consultant — UC & CC Solutions',
-                company: 'Avaya', period: 'Aug 2023 – Present',
+                role: 'APS Technical Consultant - UC & CC Solutions',
+                company: 'Avaya', period: 'Aug 2023 - Present',
                 bullets: [
                     'Designed Avaya CC & UC solutions: Communication Manager, CC Elite, WFO, Avaya Infinity, Cloud Office.',
                     'Led end-to-end implementation of complex telephony platforms. Advanced L3 support with Avaya engineering.',
-                    'Conducted technical workshops and training sessions ensuring optimal solution adoption.'
+                    'Conducted technical workshops and training sessions ensuring optimal solution adoption.',
                 ]
             },
             {
                 role: 'Solution Design Presales',
-                company: 'DirMOD S.A.', period: 'Jun 2022 – Jul 2023',
+                company: 'DirMOD S.A.', period: 'Jun 2022 - Jul 2023',
                 bullets: [
                     'Led technical meetings, presentations, and demos for corporate clients. Consistently achieved technical deal closures.',
-                    'Developed comprehensive technical proposals, RFI/RFP responses, and solution specifications.'
+                    'Developed comprehensive technical proposals, RFI/RFP responses, and solution specifications.',
                 ]
             },
             {
-                role: 'UC & CC Solution Architect — LatAm',
-                company: 'Lumen Technologies', period: 'Aug 2021 – Jun 2022',
+                role: 'UC & CC Solution Architect - LatAm',
+                company: 'Lumen Technologies', period: 'Aug 2021 - Jun 2022',
                 bullets: [
                     'Defined architecture frameworks for UC/CC solutions (MS Teams, Avaya, Genesys, Five9, Collab) across LatAm.',
-                    'Regional technical reference. Implementations in 5+ countries. Certified in Avaya, Teams, Collab.'
+                    'Regional technical reference. Implementations in 5+ countries. Certified in Avaya, Teams, Collab.',
                 ]
             },
             {
-                role: 'Engineering & Solutions Manager → Presales Engineer',
-                company: 'Inside One S.A.', period: 'Aug 2014 – Jul 2021',
+                role: 'Engineering & Solutions Manager / Presales Engineer',
+                company: 'Inside One S.A.', period: 'Aug 2014 - Jul 2021',
                 bullets: [
                     'Grew from Presales Engineer to Engineering Manager over 7 years leading full engineering team.',
                     'Developed fraud detection systems. Designed architectures for Avaya, Cisco Meraki, Extreme, Collab.',
-                    'Created technical manuals and provided Level 3 client support.'
+                    'Created technical manuals and provided Level 3 client support.',
                 ]
             },
             {
                 role: 'Customer Support Engineer',
-                company: 'Avaya', period: 'Sep 2009 – Dec 2011',
+                company: 'Avaya', period: 'Sep 2009 - Dec 2011',
                 bullets: ['L3 support: TDM/IP/SIP telephony, Linux admin, Communication Manager.']
-            }
+            },
         ];
 
         experiences.forEach(exp => {
-            if (ry > H - 30) return;
+            if (ry > H - 40) return;
             doc.setFont('helvetica', 'bold');
             doc.setFontSize(7.5);
             doc.setTextColor(...white);
-            doc.text(exp.role, rx, ry);
+            const rLines = doc.splitTextToSize(exp.role, rightW);
+            doc.text(rLines, rx, ry);
+            ry += rLines.length * 4.2;
             doc.setFont('helvetica', 'normal');
             doc.setFontSize(6.5);
             doc.setTextColor(...accent);
-            doc.text(exp.company + '  |  ' + exp.period, rx, ry + 4);
-            ry += 9;
+            doc.text(exp.company + '  |  ' + exp.period, rx, ry);
+            ry += 5;
             doc.setTextColor(...muted);
             exp.bullets.forEach(b => {
-                if (ry > H - 20) return;
-                const lines = doc.splitTextToSize('• ' + b, W - rx - margin);
-                doc.text(lines, rx, ry);
-                ry += lines.length * 3.8 + 1;
+                if (ry > H - 25) return;
+                const bLines = doc.splitTextToSize('- ' + b, rightW);
+                doc.text(bLines, rx, ry);
+                ry += bLines.length * 3.8 + 1.5;
             });
-            ry += 5;
+            ry += 4;
         });
 
-        // Achievements strip
-        if (ry < H - 35) {
-            doc.setFont('helvetica', 'bold');
-            doc.setFontSize(7.5);
-            doc.setTextColor(...accent);
-            doc.text('KEY ACHIEVEMENTS', rx, ry);
-            ry += 2;
-            doc.setDrawColor(...accent);
-            doc.line(rx, ry, W - margin, ry);
-            ry += 5;
+        // KEY ACHIEVEMENTS
+        if (ry < H - 40) {
+            ry = rightHeader('KEY ACHIEVEMENTS', ry);
             doc.setFont('helvetica', 'normal');
             doc.setFontSize(6.5);
             doc.setTextColor(...muted);
-            const achievements = [
-                '★ Implemented UC/CC nodes across 5 countries with seamless stakeholder coordination',
-                '★ Presented and received approval for cloud architecture from AON\'s global board of directors',
-                '★ Developed fraud detection systems from scratch, significantly enhancing security',
-            ];
-            achievements.forEach(a => {
-                const lines = doc.splitTextToSize(a, W - rx - margin);
-                doc.text(lines, rx, ry);
-                ry += lines.length * 3.8 + 2;
+            [
+                'Implemented UC/CC nodes across 5 countries with seamless stakeholder coordination.',
+                "Presented and received approval for cloud architecture from AON's global board of directors.",
+                'Developed fraud detection systems from scratch, significantly enhancing security.',
+            ].forEach(a => {
+                if (ry > H - 20) return;
+                const aLines = doc.splitTextToSize('> ' + a, rightW);
+                doc.text(aLines, rx, ry);
+                ry += aLines.length * 3.8 + 2.5;
             });
-            ry += 5;
+            ry += 4;
         }
 
-        // Education & Certs compact
-        if (ry < H - 25) {
-            doc.setFont('helvetica', 'bold');
-            doc.setFontSize(7.5);
-            doc.setTextColor(...accent);
-            doc.text('EDUCATION & CERTIFICATIONS', rx, ry);
-            ry += 2;
-            doc.setDrawColor(...accent);
-            doc.line(rx, ry, W - margin, ry);
-            ry += 5;
+        // EDUCATION & CERTIFICATIONS
+        if (ry < H - 30) {
+            ry = rightHeader('EDUCATION & CERTIFICATIONS', ry);
             doc.setFont('helvetica', 'normal');
             doc.setFontSize(6.5);
             doc.setTextColor(...muted);
-            const edCerts = [
-                '2025 · GCBA TalentTech — Salesforce Administrator',
-                '2025 · GCBA TalentTech — Python & Node.js Backend',
-                '2024 · Frontend Developer — Digital House',
-                '2023 · AWS Cloud Practitioner',
-                '2022 · Microsoft M100 / Teams Certification',
-                '2016+ · System Analyst — Universidad de Belgrano',
-            ];
-            edCerts.forEach(c => {
+            [
+                '2025 - GCBA TalentTech: Salesforce Administrator',
+                '2025 - GCBA TalentTech: Python & Node.js Backend',
+                '2024 - Frontend Developer, Digital House',
+                '2023 - AWS Cloud Practitioner',
+                '2022 - Microsoft M100 / Teams Certification',
+                '2016+ - System Analyst, Universidad de Belgrano',
+            ].forEach(c => {
+                if (ry > H - 15) return;
                 doc.text(c, rx, ry);
                 ry += 4;
             });
         }
 
-        // Footer
+        // FOOTER
         doc.setFillColor(...dark2);
         doc.rect(0, H - 10, W, 10, 'F');
         doc.setFont('helvetica', 'normal');
         doc.setFontSize(6);
         doc.setTextColor(...muted);
-        doc.text('Sebastian Adrián Sosa · ssosa17@gmail.com · linkedin.com/in/ssosa17 · Generated 2026', W / 2, H - 4, { align: 'center' });
+        doc.text(
+            'Sebastian Adrian Sosa  |  ssosa17@gmail.com  |  linkedin.com/in/ssosa17  |  Generated 2026',
+            W / 2, H - 4, { align: 'center' }
+        );
 
         doc.save('Sebastian_Sosa_Technical_CV.pdf');
+
     } catch (err) {
         console.error('PDF generation error:', err);
         alert('Could not generate PDF. Please try again.');
